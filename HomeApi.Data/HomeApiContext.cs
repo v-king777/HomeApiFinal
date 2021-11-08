@@ -9,8 +9,8 @@ namespace HomeApi.Data
     {
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Device> Devices { get; set; }
-        
-        public HomeApiContext(DbContextOptions<HomeApiContext> options)  : base(options)
+
+        public HomeApiContext(DbContextOptions<HomeApiContext> options) : base(options)
         {
             Database.EnsureCreated();
         }

@@ -5,7 +5,7 @@
     /// </summary>
     public static class Values
     {
-        public static string [] ValidRooms = new  []
+        public static string[] ValidRooms = new[]
         {
             "Кухня",
             "Ванная",

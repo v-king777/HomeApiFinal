@@ -30,32 +30,32 @@ namespace HomeApi
             // Подключаем автомаппинг
             var assembly = Assembly.GetAssembly(typeof(MappingProfile));
             services.AddAutoMapper(assembly);
-            
+
             // регистрация сервиса репозитория для взаимодействия с базой данных
             services.AddSingleton<IDeviceRepository, DeviceRepository>();
             services.AddSingleton<IRoomRepository, RoomRepository>();
-            
-            string connection = Configuration. GetConnectionString("DefaultConnection");
+
+            string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<HomeApiContext>(options =>
                 options.UseSqlServer(connection), ServiceLifetime.Singleton);
-            
+
             // Подключаем валидацию
-            services.AddFluentValidation( fv => 
-                fv.RegisterValidatorsFromAssemblyContaining<AddDeviceRequestValidator>() );
-            
+            services.AddFluentValidation(fv =>
+               fv.RegisterValidatorsFromAssemblyContaining<AddDeviceRequestValidator>());
+
             // Добавляем новый сервис
             services.Configure<HomeOptions>(Configuration);
-            
+
             // Загружаем только адресс (вложенный Json-объект))
             services.Configure<Address>(Configuration.GetSection("Address"));
-            
+
             // Нам не нужны представления, но в MVC бы здесь стояло AddControllersWithViews()
             services.AddControllers();
 
             // поддерживает автоматическую генерацию документации WebApi с использованием Swagger
-            services.AddSwaggerGen(c => 
-            { 
-                c.SwaggerDoc("v1", new OpenApiInfo {Title = "HomeApi", Version = "v1"}); 
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "HomeApi", Version = "v1" });
             });
         }
 

@@ -21,7 +21,7 @@ namespace HomeApi
             CreateMap<HomeOptions, InfoResponse>()
                 .ForMember(m => m.AddressInfo,
                     opt => opt.MapFrom(src => src.Address));
-            
+
             // Валидация запросов
             CreateMap<AddDeviceRequest, Device>()
                 .ForMember(d => d.Location,

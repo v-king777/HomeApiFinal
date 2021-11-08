@@ -6,9 +6,9 @@
   "GasConnected": true,
   "Area": 250,
   "Material": "Brick",
-  "Address" : {
-    "House" : 34,
+  "Address": {
+    "House": 34,
     "Building": 2,
-    "Street" : "Pushkina"
+    "Street": "Pushkina"
   }
 }
