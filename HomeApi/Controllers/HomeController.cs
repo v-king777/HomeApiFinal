@@ -10,8 +10,8 @@ namespace HomeApi.Controllers
     [Route("[controller]")]
     public class HomeController : ControllerBase
     {
-        private IOptions<HomeOptions> _options;
-        private IMapper _mapper;
+        private readonly IOptions<HomeOptions> _options;
+        private readonly IMapper _mapper;
 
         // Инициализация конфигурации при вызове конструктора
         public HomeController(IOptions<HomeOptions> options, IMapper mapper)

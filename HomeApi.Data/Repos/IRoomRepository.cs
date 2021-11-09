@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using HomeApi.Data.Models;
+using HomeApi.Data.Queries;
 
 namespace HomeApi.Data.Repos
 {
@@ -13,5 +15,11 @@ namespace HomeApi.Data.Repos
         Task AddRoom(Room room);
 
         Task<Room[]> GetRooms();
+
+        Task UpdateRoom(Room room, UpdateRoomQuery query);
+
+        Task DeleteRoom(Room room);
+
+        Task<Room> GetRoomById(Guid id);
     }
 }

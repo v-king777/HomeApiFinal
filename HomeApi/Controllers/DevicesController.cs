@@ -58,7 +58,7 @@ namespace HomeApi.Controllers
 
             await _devices.DeleteDevice(device);
 
-            return StatusCode(200, $"Устройство {device.Name} удалено!");
+            return StatusCode(200, $"Устройство '{device.Name}' удалено!");
         }
 
         /// <summary>
@@ -70,17 +70,17 @@ namespace HomeApi.Controllers
         {
             var room = await _rooms.GetRoomByName(request.RoomLocation);
             if (room == null)
-                return StatusCode(400, $"Ошибка: Комната {request.RoomLocation} не подключена. " +
+                return StatusCode(400, $"Ошибка: Комната '{request.RoomLocation}' не подключена. " +
                     $"Сначала подключите комнату!");
 
             var device = await _devices.GetDeviceByName(request.Name);
             if (device != null)
-                return StatusCode(400, $"Ошибка: Устройство {request.Name} уже существует.");
+                return StatusCode(400, $"Ошибка: Устройство '{request.Name}' уже существует.");
 
             var newDevice = _mapper.Map<AddDeviceRequest, Device>(request);
             await _devices.SaveDevice(newDevice, room);
 
-            return StatusCode(201, $"Устройство {request.Name} добавлено. Идентификатор: {newDevice.Id}");
+            return StatusCode(201, $"Устройство '{request.Name}' добавлено. Идентификатор: {newDevice.Id}");
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace HomeApi.Controllers
         {
             var room = await _rooms.GetRoomByName(request.NewRoom);
             if (room == null)
-                return StatusCode(400, $"Ошибка: Комната {request.NewRoom} не подключена. " +
+                return StatusCode(400, $"Ошибка: Комната '{request.NewRoom}' не подключена. " +
                     $"Сначала подключите комнату!");
 
             var device = await _devices.GetDeviceById(id);
@@ -101,7 +101,7 @@ namespace HomeApi.Controllers
 
             var withSameName = await _devices.GetDeviceByName(request.NewName);
             if (withSameName != null)
-                return StatusCode(400, $"Ошибка: Устройство с именем {request.NewName} уже подключено. " +
+                return StatusCode(400, $"Ошибка: Устройство '{request.NewName}' уже подключено. " +
                     $"Выберите другое имя!");
 
             await _devices.UpdateDevice(
