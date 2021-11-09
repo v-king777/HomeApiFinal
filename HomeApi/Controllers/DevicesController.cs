@@ -45,7 +45,21 @@ namespace HomeApi.Controllers
             return StatusCode(200, resp);
         }
 
-        // TODO: Задание: напишите запрос на удаление устройства
+        /// <summary>
+        /// Удаление устройства
+        /// </summary>
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] Guid id)
+        {
+            var device = await _devices.GetDeviceById(id);
+            if (device == null)
+                return StatusCode(400, $"Ошибка: Устройство с идентификатором {id} не существует.");
+
+            await _devices.DeleteDevice(device);
+
+            return StatusCode(200, $"Устройство {device.Name} удалено!");
+        }
 
         /// <summary>
         /// Добавление нового устройства
@@ -74,9 +88,7 @@ namespace HomeApi.Controllers
         /// </summary>
         [HttpPatch]
         [Route("{id}")]
-        public async Task<IActionResult> Edit(
-            [FromRoute] Guid id,
-            [FromBody] EditDeviceRequest request)
+        public async Task<IActionResult> Edit([FromRoute] Guid id, [FromBody] EditDeviceRequest request)
         {
             var room = await _rooms.GetRoomByName(request.NewRoom);
             if (room == null)
