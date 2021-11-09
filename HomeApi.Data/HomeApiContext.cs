@@ -7,13 +7,14 @@ namespace HomeApi.Data
 {
     public sealed class HomeApiContext : DbContext
     {
-        public DbSet<Room> Rooms { get; set; }
-        public DbSet<Device> Devices { get; set; }
-
         public HomeApiContext(DbContextOptions<HomeApiContext> options) : base(options)
         {
             Database.EnsureCreated();
         }
+
+        public DbSet<Room> Rooms { get; set; }
+
+        public DbSet<Device> Devices { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

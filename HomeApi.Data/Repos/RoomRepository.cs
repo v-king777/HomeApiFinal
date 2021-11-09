@@ -18,7 +18,7 @@ namespace HomeApi.Data.Repos
         }
 
         /// <summary>
-        ///  Найти комнату по имени
+        /// Найти комнату по имени
         /// </summary>
         public async Task<Room> GetRoomByName(string name)
         {
@@ -26,7 +26,7 @@ namespace HomeApi.Data.Repos
         }
 
         /// <summary>
-        ///  Добавить новую комнату
+        /// Добавить новую комнату
         /// </summary>
         public async Task AddRoom(Room room)
         {
@@ -35,6 +35,14 @@ namespace HomeApi.Data.Repos
                 await _context.Rooms.AddAsync(room);
 
             await _context.SaveChangesAsync();
+        }
+
+        /// <summary>
+        /// Получить все подключенные комнаты
+        /// </summary>
+        public async Task<Room[]> GetRooms()
+        {
+            return await _context.Rooms.ToArrayAsync();
         }
     }
 }
